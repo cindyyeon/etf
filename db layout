@@ -1,0 +1,52 @@
+database etf
+
+table
+1. ticker_info: 종목 정보 테이블
+2. ticker_price_data_info: 종목 정보 업데이트 테이블. 가격을 받은 후, 업데이트 일자를 적어 둡니다.
+3. amex_price, nyse_price, nasdaq_price: 거래소별 가격 정보 테이블
+
+create table etf.ticker_info
+(
+    ticker_id int auto_increment,
+    ticker    varchar(10)  not null,
+    exchange  varchar(10)  null,
+    name      varchar(100) null,
+    industry  varchar(50)  null,
+    primary key (ticker_id, ticker)
+);
+
+
+create table etf.ticker_price_data_info
+(
+    id        int auto_increment,
+    exchange  varchar(10) not null,
+    ticker    varchar(10) not null,
+    last_date datetime    null,
+    primary key (id, exchange, ticker)
+);
+
+
+create table etf.amex_price
+(
+    ticker_id        int auto_increment,
+    td               datetime    not null,
+    ticker           varchar(10) not null,
+    close            double      null,
+    rtn              double      null,
+    open             double      null,
+    high             double      null,
+    low              double      null,
+    volume           double      null,
+    clo5             double      null,
+    clo10            double      null,
+    clo20            double      null,
+    clo60            double      null,
+    clo120           double      null,
+    clo5_diff_rate   double      null,
+    clo10_diff_rate  double      null,
+    clo20_diff_rate  double      null,
+    clo60_diff_rate  double      null,
+    clo120_diff_rate double      null,
+    primary key (ticker_id, td, ticker)
+);
+
